@@ -1,5 +1,7 @@
 let currentIndex = 0;
 
+setInterval(()=> { slide(1) }, 5000);
+
 function slide(direction) {
 
   const track = document.querySelector('.carousel-track');
