@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrossel de Imagens</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+    
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .slide {
+      min-width: 100%;
+    }
+    
+    .slide img {
+      width: 100%;
+      display: block;
+    }
+    
+    button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 0.5rem;
+      cursor: pointer;
+      z-index: 1;
+    }
+    
+    .prev {
+      left: 10px;
+    }
+    
+    .next {
+      right: 10px;
+    }
+    
+    button:focus {
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <button class="prev" onclick="slide(-1)">❮</button>
+    <div class="carousel-track">
+      <div class="slide"><img src="https://i.imgur.com/zVOmiy1.jpg" alt="Imagem 1"></div>
+      <div class="slide"><img src="https://i.imgur.com/25FPx0g.jpg" alt="Imagem 2"></div>
+      <div class="slide"><img src="https://i.imgur.com/HFiZ1bP.jpg" alt="Imagem 3"></div>
+    </div>
+    <button class="next" onclick="slide(1)">❯</button>
+  </div>
+
+  <script>
+    let currentIndex = 0;
+
+    setInterval(()=> { slide(1) }, 5000);
+
+    function slide(direction) {
+
+      const track = document.querySelector('.carousel-track');
+      const slides = document.querySelectorAll('.slide');
+      const totalSlides = slides.length;
+
+      currentIndex += direction;
+
+      if (currentIndex < 0) {
+        currentIndex = totalSlides - 1;
+      } else if (currentIndex >= totalSlides) {
+        currentIndex = 0;
+      }
+
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+  </script>
+</body>
+</html>
